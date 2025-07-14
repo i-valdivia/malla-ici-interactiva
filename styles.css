@@ -1,0 +1,35 @@
+
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #fff0f5;
+  color: #4b004b;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+th, td {
+  border: 1px solid #d48bb4;
+  padding: 8px;
+  text-align: left;
+}
+th {
+  background-color: #ffcce6;
+}
+td[contenteditable="true"] {
+  background-color: #ffe6f2;
+}
+button {
+  padding: 6px 12px;
+  margin-top: 10px;
+  cursor: pointer;
+  background-color: #ff80bf;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+button:hover {
+  background-color: #ff4da6;
+}

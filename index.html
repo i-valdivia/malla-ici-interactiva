@@ -1,200 +1,54 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Malla Ingeniería Civil Industrial</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #fff0f5;
-      color: #333;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      color: #d63384;
-      text-align: center;
-    }
-    .year {
-      margin-top: 40px;
-    }
-    .semester {
-      margin: 20px 0;
-      background: #ffe6f0;
-      padding: 15px;
-      border-radius: 12px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .subject {
-      margin: 5px 0;
-      cursor: pointer;
-      padding: 8px;
-      border-radius: 8px;
-      transition: background 0.2s;
-    }
-    .subject:hover {
-      background: #ffd6e8;
-    }
-    .subject.approved {
-      background: #e6ffe6;
-      text-decoration: line-through;
-    }
-    .prereq {
-      display: none;
-      font-size: 0.9em;
-      color: #555;
-      margin-top: 5px;
-      margin-left: 15px;
-    }
-  </style>
+  <title>Malla Interactiva - Ingeniería Civil Industrial</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h1>Malla Interactiva - Ingeniería Civil Industrial</h1>
-  <div id="malla"></div>
 
-  <script>
-    const data = {
-      "Año 1": {
-        "Semestre 1": [
-          { name: "Fundamentos de Matemática" },
-          { name: "Desarrollo Personal" },
-          { name: "Desafíos de Ingeniería" },
-          { name: "Fundamentos de Programación" },
-          { name: "Química para Ingeniería" },
-        ],
-        "Semestre 2": [
-          { name: "Cálculo Diferencial", prereq: "Fundamentos de Matemática" },
-          { name: "Ingeniería, Innovación y Emprendimiento", prereq: "Desafíos de Ingeniería" },
-          { name: "Programación", prereq: "Fundamentos de Programación" },
-          { name: "Fundamentos de Física" },
-        ],
-      },
-      "Año 2": {
-        "Semestre 3": [
-          { name: "Cálculo Integral y Series", prereq: "Cálculo Diferencial" },
-          { name: "Álgebra Lineal", prereq: "Fundamentos de Matemática" },
-          { name: "Física Mecánica", prereq: "Cálculo Diferencial y Fundamentos de Física" },
-          { name: "Tópicos de Formación General" },
-          { name: "Alfabetización Académica I" },
-          { name: "TIPE Sello UV I" },
-          { name: "Idioma I" },
-        ],
-        "Semestre 4": [
-          { name: "Cálculo en Varias Variables", prereq: "Cálculo Integral y Álgebra Lineal" },
-          { name: "Ecuaciones Diferenciales Ordinarias", prereq: "Cálculo Integral y Álgebra Lineal" },
-          { name: "Física Calor y Ondas", prereq: "Física Mecánica y Cálculo Integral" },
-          { name: "Administración de Empresas", prereq: "Tópicos de Formación y Alfabetización I" },
-          { name: "TIPE Sello UV II", prereq: "TIPE Sello UV I" },
-          { name: "Idioma II", prereq: "Idioma I" },
-        ],
-      },
-      "Año 3": {
-        "Semestre 5": [
-          { name: "Física Electromagnetismo", prereq: "Física Mecánica y Cálculo Integral" },
-          { name: "Estadística y Probabilidades", prereq: "Cálculo en Varias Variables y Programación" },
-          { name: "Análisis Financiero y Contable", prereq: "Álgebra y Administración" },
-          { name: "Termodinámica", prereq: "Física Calor y Ondas y Química" },
-          { name: "Análisis de Materiales y Diseño", prereq: "Química e Innovación" },
-          { name: "Principios de Data Science", prereq: "Álgebra Lineal y Programación" },
-          { name: "Idioma III", prereq: "Idioma II" },
-        ],
-        "Semestre 6": [
-          { name: "Inferencia Estadística", prereq: "Estadística y Probabilidades" },
-          { name: "Gestión Presupuestaria y Costos", prereq: "Análisis Financiero" },
-          { name: "Pensamiento Sistémico", prereq: "Data Science y Administración" },
-          { name: "Alfabetización Académica II", prereq: "Alfabetización Académica I" },
-          { name: "Micro y Macroeconomía", prereq: "Cálculo Integral y Administración" },
-          { name: "Idioma IV", prereq: "Idioma III" },
-        ],
-      },
-      "Año 4": {
-        "Semestre 7": [
-          { name: "Procesos Industriales", prereq: "Termodinámica" },
-          { name: "Gestión de Talento", prereq: "Pensamiento Sistémico y Administración" },
-          { name: "Modelamiento", prereq: "Inferencia Estadística y Álgebra" },
-          { name: "Sistemas de Información", prereq: "Pensamiento Sistémico y Data Science" },
-          { name: "Economía Circular", prereq: "Análisis de Materiales y Economía" },
-          { name: "Gestión de la Innovación", prereq: "Tópicos y Análisis de Materiales" },
-        ],
-        "Semestre 8": [
-          { name: "Gestión de Operaciones I", prereq: "Modelamiento" },
-          { name: "Análisis y Estrategia de Negocios", prereq: "Costos y Economía" },
-          { name: "Visualización de Datos", prereq: "Sistemas de Información" },
-          { name: "Investigación de Operaciones", prereq: "Modelamiento" },
-          { name: "Ingeniería Económica", prereq: "Costos y Economía" },
-          { name: "Proyecto de Licenciatura", prereq: "Varios (Procesos, Gestión, Economía)" },
-        ],
-      },
-      "Año 5": {
-        "Semestre 9": [
-          { name: "Gestión Energética", prereq: "Economía Circular" },
-          { name: "Gestión de Operaciones II", prereq: "Gestión de Operaciones I" },
-          { name: "Dirección Estratégica", prereq: "Análisis y Estrategia" },
-          { name: "Evaluación de Proyectos", prereq: "Ingeniería Económica y Economía Circular" },
-          { name: "Simulación de Procesos", prereq: "Procesos Industriales y Modelamiento" },
-          { name: "Desarrollo Organizacional", prereq: "Gestión de Talento y Estrategia" },
-        ],
-        "Semestre 10": [
-          { name: "Gestión de Riesgos", prereq: "Estrategia y Economía Circular" },
-          { name: "Cadena de Suministros", prereq: "Gestión de Operaciones II e Investigación" },
-          { name: "Project Management", prereq: "Dirección Estratégica y Proyectos" },
-          { name: "Estrategia de Marketing", prereq: "Gestión de la Innovación" },
-          { name: "Electivo Profesional I", prereq: "Múltiples" },
-          { name: "Finanzas", prereq: "Ingeniería Económica" },
-          { name: "Taller de Comunicación Efectiva", prereq: "Múltiples" },
-        ],
-      },
-      "Año 6": {
-        "Semestre 11": [
-          { name: "Proyecto de Título", prereq: "Todos los anteriores" },
-          { name: "Electivo Profesional II", prereq: "Múltiples" },
-          { name: "Práctica Profesional", prereq: "Proyecto y Taller" },
-        ],
-      }
-    };
+  <label for="filtroAnio">Filtrar por año:</label>
+  <select id="filtroAnio" onchange="filtrarTabla()">
+    <option value="">Todos</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+  </select>
 
-    const container = document.getElementById("malla");
+  <label for="filtroSemestre">Filtrar por semestre:</label>
+  <select id="filtroSemestre" onchange="filtrarTabla()">
+    <option value="">Todos</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+  </select>
 
-    for (const year in data) {
-      const yearDiv = document.createElement("div");
-      yearDiv.className = "year";
-      yearDiv.innerHTML = `<h2>${year}</h2>`;
+  <table id="malla">
+    <thead>
+      <tr>
+        <th>Año</th>
+        <th>Semestre</th>
+        <th>Ramo</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 
-      for (const semester in data[year]) {
-        const semDiv = document.createElement("div");
-        semDiv.className = "semester";
-        semDiv.innerHTML = `<h3>${semester}</h3>`;
-
-        data[year][semester].forEach(subject => {
-          const subjDiv = document.createElement("div");
-          subjDiv.className = "subject";
-          subjDiv.textContent = subject.name;
-
-          if (subject.prereq) {
-            const prereq = document.createElement("div");
-            prereq.className = "prereq";
-            prereq.textContent = `Requisito(s): ${subject.prereq}`;
-            subjDiv.appendChild(prereq);
-
-            subjDiv.addEventListener("click", () => {
-              subjDiv.classList.toggle("approved");
-              prereq.style.display = prereq.style.display === "block" ? "none" : "block";
-            });
-          } else {
-            subjDiv.addEventListener("click", () => {
-              subjDiv.classList.toggle("approved");
-            });
-          }
-
-          semDiv.appendChild(subjDiv);
-        });
-
-        yearDiv.appendChild(semDiv);
-      }
-
-      container.appendChild(yearDiv);
-    }
-  </script>
+  <button onclick="agregarFila()">➕ Agregar Ramo</button>
+  <script src="script.js"></script>
 </body>
 </html>
